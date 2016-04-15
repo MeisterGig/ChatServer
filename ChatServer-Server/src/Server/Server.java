@@ -64,10 +64,10 @@ public class Server {
 	
 	public void sendToAll(Packet message){
 		String from = message.from;
+		String msg = encryption.decryptString(message.message);
 		clients.forEach((k, v)->{
 			if(!k.equals(from)){
-				byte[] b = encryption.decrypt(message.message);
-				message.message=encryption.encrypt(b, v.getPublicKey());
+				message.message=encryption.encryptString("<b>" + from + "</b>: " + msg, v.getPublicKey());
 				message.from="Global";
 				v.send(message);
 			}
