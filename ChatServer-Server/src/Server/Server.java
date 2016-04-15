@@ -69,6 +69,7 @@ public class Server {
 			if(!k.equals(from)){
 				message.message=encryption.encryptString("<b>" + from + "</b>: " + msg, v.getPublicKey());
 				message.from="Global";
+				message.target=from;
 				v.send(message);
 			}
 		});
